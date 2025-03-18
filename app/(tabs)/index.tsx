@@ -15,7 +15,7 @@ import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
 import MovieCard from "@/components/MovieCard";
 
-export default function Index() {
+const Index = () => {
   const router = useRouter();
   const {
     data: movies,
@@ -29,7 +29,11 @@ export default function Index() {
 
   return (
     <View className="flex-1 bg-primary">
-      <Image source={images.bg} className="absolute w-full z-0" />
+      <Image
+        source={images.bg}
+        className="absolute w-full z-0"
+        resizeMode="cover"
+      />
       <ScrollView
         className="flex-1 px-5"
         showsVerticalScrollIndicator={false}
@@ -48,7 +52,9 @@ export default function Index() {
         ) : (
           <View className="flex-1 mt-5">
             <SearchBar
-              onPress={() => router.push("/search")}
+              onPress={() => {
+                router.push("/search");
+              }}
               placeholder={"Search for movies or TV shows"}
             />
             <>
@@ -62,7 +68,7 @@ export default function Index() {
                 numColumns={3}
                 columnWrapperStyle={{
                   justifyContent: "flex-start",
-                  gap: 10,
+                  gap: 20,
                   paddingRight: 5,
                   marginBottom: 10,
                 }}
@@ -75,4 +81,6 @@ export default function Index() {
       </ScrollView>
     </View>
   );
-}
+};
+
+export default Index;
