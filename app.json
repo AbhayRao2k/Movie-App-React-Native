@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Movie App Native",
-    "slug": "movie-app-native",
+    "name": "ReelTime Max",
+    "slug": "reeltime-max",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
@@ -14,7 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#030014"
       }
     },
     "web": {
@@ -30,7 +30,7 @@
           "image": "./assets/images/logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#030014"
         }
       ]
     ],

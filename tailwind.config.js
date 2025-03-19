@@ -5,6 +5,9 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
+      fontFamily: {
+        bebas: "BebasNeue", // Custom font class
+      },
       colors: {
         primary: "#030014",
         secondary: "#151312",

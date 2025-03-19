@@ -6,6 +6,7 @@ import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
 import { icons } from "@/constants/icons";
 import SearchBar from "@/components/SearchBar";
+import { updateSearchCount } from "@/services/appwrite";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,18 +24,25 @@ const Search = () => {
     false
   );
 
+  // Using debouncer to prevent unnecessary API calls
   useEffect(() => {
-    // Using debouncer to prevent unnecessary API calls
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
+
       } else {
         reset();
       }
-    }, 700);
+    }, 500);
 
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
+
+  useEffect(()=> {
+    if (movies?.length! > 0 && movies?.[0]) {
+      updateSearchCount(searchQuery, movies[0]);
+    }
+  }, [movies])
 
   return (
     <View className="flex-1 bg-primary">
@@ -64,11 +72,13 @@ const Search = () => {
               <Image source={icons.logo} className="w-12 h-10" />
             </View>
 
-            <View className="my-5">
+            <View className="my-7">
               <SearchBar
-                placeholder={"Search for movies or TV shows"}
+                onPress={() => {}} 
+                placeholder={"Search through 1000+ movies and TV shows"}
                 value={searchQuery}
                 onChangeText={(text: string) => setSearchQuery(text)}
+                autoFocus={true}
               />
             </View>
 
@@ -86,7 +96,7 @@ const Search = () => {
               </Text>
             )}
 
-            {!loading && !error && searchQuery.trim() && movies?.length > 0 && (
+            {!loading && !error && searchQuery.trim() && (
               <Text className="text-white font-bold">
                 Search results for{" "}
                 <Text className="text-accent">{searchQuery}</Text>
@@ -100,7 +110,7 @@ const Search = () => {
               <Text className="text-center text-gray-500">
                 {searchQuery.trim()
                   ? "No results found"
-                  : "Search your favorite movies or TV shows"}
+                  : "Search here to get started"}
               </Text>
             </View>
           ) : null
